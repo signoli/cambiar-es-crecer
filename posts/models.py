@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.base import Model
+from django.db.models.fields import CharField
 
 class User(AbstractUser):
     pass
@@ -8,9 +10,17 @@ class User(AbstractUser):
         return self.username
 
 
+class Category(models.Model):
+    name = CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
     thumbnail = models.ImageField()
     publish_date = models.DateTimeField(auto_now_add=True)
     last_updated = models.DateTimeField(auto_now=True)
@@ -45,3 +55,5 @@ class Like(models.Model):
    
     def __str__(self):
         return self.user.username
+
+

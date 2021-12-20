@@ -5,7 +5,7 @@
         <h1>Esta seguro que desea eliminar el post "{{ object.title}}" </h1>
         <form method="POST">
             {% csrf_token %}
-            <button class='btn btn-primary' type='submit'> Confirmar </button>
+            <button class='btn btn-danger' type='submit'> Confirmar </button>
         </form>
     <div>
 {% endblock content%}

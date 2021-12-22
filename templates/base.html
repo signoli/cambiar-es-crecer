@@ -58,10 +58,20 @@
                         </ul>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
+                {% if user.is_authenticated %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ user.username|upper }}
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
+                        </ul>
+                    </div>
+			        <!-- <span>Bienvenid@, {{ user.username|upper }}!</span>
+                    <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Cerrar sesión</a> -->
+		        {% else %}
+                    <a class="btn btn-outline-primary" href="{% url 'login' %}" role="button">Iniciar sesión</a>
+                {% endif %}
             </div>
         </div>
     </nav>

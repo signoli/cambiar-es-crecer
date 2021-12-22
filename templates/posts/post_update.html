@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 {% block content %}
-    <div class="container">
-        <h1>Update psot</h1>
+    <form class="container" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Actualizar detalles del post</h1>
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+            Actualizar
+            </button>
+        {% endbuttons %}
     <div>
 {% endblock content%}

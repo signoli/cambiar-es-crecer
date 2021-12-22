@@ -54,6 +54,7 @@ class PostCreateView(CreateView):
 class PostUpdateView(UpdateView):
     form_class = PostForm
     model = Post
+    template_name_suffix = '_update'
     success_url = '/'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

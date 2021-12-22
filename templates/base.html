@@ -28,7 +28,7 @@
 </head>
 
 <body>
-
+    {% block nav %}
     <!-- NAVEGADOR DEL SITIO -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -75,7 +75,7 @@
             </div>
         </div>
     </nav>
-
+    {% endblock nav %}
     <!-- CONTENIDO DE LA PAGINA-->
     {% block content %}
     

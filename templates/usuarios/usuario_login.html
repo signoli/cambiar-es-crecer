@@ -1,7 +1,54 @@
 {% extends 'base.html' %}
 
+{% block nav %}{% endblock %}
+
+{% block style %}
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+        text-align: center!important;
+    }
+
+    .form-signin {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: auto;
+    }
+
+    .form-signin .checkbox {
+        font-weight: 400;
+    }
+
+    .form-signin .form-floating:focus-within {
+        z-index: 2;
+    }
+
+    .form-signin input[type="email"] {
+        margin-bottom: -1px;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .form-signin input[type="password"] {
+        margin-bottom: 10px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+</style>
+{% endblock style %}
+
 {% block content %}
-{% if form.error %}
+{% if form.errors %}
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>Oops!</strong> {{ form.errors }}
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -17,11 +64,7 @@
         required="" autofocus="">
     <label for="password" class="sr-only">Contraseña</label>
     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
-    <div class="checkbox mb-3">
-        <label>
-            <input type="checkbox" value="remember-me">Recordarme
-        </label>
-    </div>
+    <div class="checkbox mb-3"></div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar Sesión</button>
     <p class="mt-5 mb-3 text-muted">© Cambiar es Crecer 2021</p>
 </form>

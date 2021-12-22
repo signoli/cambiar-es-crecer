@@ -11,8 +11,12 @@
 
 {% block content %}
     <div class="container">
+        {% if perms.posts.can_delete_post %}
         <a class="btn btn-danger" href="{% url 'delete' slug=object.slug %}">Eliminar</a>
+        {% endif %}
+        {% if perms.posts.can_change_post %}   
         <a class="btn btn-outline-primary" href="{% url 'update' slug=object.slug %}">Actualizar</a>
+        {% endif %}
         <h1>{{object.title}}</h1>
         <img src="{{object.thumbnail.url}}" class="card-img-top" alt="...">
         <p>{{object.content}}</p>

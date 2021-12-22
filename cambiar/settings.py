@@ -23,7 +23,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts',
-    'usuarios',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -114,7 +113,7 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
-AUTH_USER_MODEL = 'usuarios.User'
+AUTH_USER_MODEL = 'posts.User'
 
 LOGIN_REDIRECT_URL = reverse_lazy('list')
 LOGOUT_REDIRECT_URL = reverse_lazy('list')

@@ -17,13 +17,13 @@ urlpatterns = [
     path('signup', UserCreateView.as_view(template_name="usuarios/usuario_signup.html"), name='signup'),
     path('login', auth.LoginView.as_view(template_name="usuarios/usuario_login.html", redirect_authenticated_user=False), name='login'),
     path('logout', auth.LogoutView.as_view(), name='logout'),
-    path('admin', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('accounts', include('allauth.urls')),
     path('', PostListView.as_view(),name='list'),
-    path('create/', PostCreateView.as_view(),name='create'),
-    path('<slug>', PostDetailView.as_view(),name='detail'),
-    path('<slug>/update', PostUpdateView.as_view(),name='update'),
-    path('<slug>/delete', PostDeleteView.as_view(),name='delete')  
+    path('post/create/', PostCreateView.as_view(),name='create'),
+    path('post/<slug>', PostDetailView.as_view(),name='detail'),
+    path('post/<slug>/update', PostUpdateView.as_view(),name='update'),
+    path('post/<slug>/delete', PostDeleteView.as_view(),name='delete')  
 ]
 
 

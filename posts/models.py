@@ -4,12 +4,7 @@ from django.db.models.base import Model
 from django.db.models.fields import CharField
 from django.shortcuts import reverse 
 
-class User(AbstractUser):
-    pass
-
-    def __str__(self):
-        return self.username
-
+from usuarios.models import User 
 
 class Category(models.Model):
     name = CharField(max_length=100)

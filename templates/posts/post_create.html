@@ -1,7 +1,24 @@
 {% extends 'base.html' %}
 
+{# Load the tag library #}
+{% load bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 {% block content %}
-    <div class="container">
+    <form class="container" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
         <h1>Crear un post nuevo</h1>
+        {% bootstrap_form form %}
+        {% buttons %}
+            <button type="submit" class="btn btn-primary">
+            Submit
+            </button>
+        {% endbuttons %}
     <div>
 {% endblock content%}

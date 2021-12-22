@@ -5,6 +5,9 @@ from django.views.generic import ListView, DeleteView, CreateView,UpdateView, De
 from .forms import PostForm
 from posts.models import Post
 
+from slugify import slugify
+import uuid
+
 
 class PostListView(ListView):
     model = Post
@@ -19,14 +22,16 @@ class PostDeleteView(DeleteView):
 class PostCreateView(CreateView):
     form_class = PostForm
     model = Post
+    template_name_suffix = '_create'
     success_url = '/'
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context.update(
-            {
-                'view_type': 'create' 
-            })
+        context.update({ 'view_type': 'create' })
         return context
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.slug = slugify(form.instance.title) + '_' + str(uuid.uuid4())[:8]
+        return super().form_valid(form)
 
 
 class PostUpdateView(UpdateView):

@@ -11,6 +11,8 @@
 
 {% block content %}
     <div class="container">
+        <a class="btn btn-danger" href="{% url 'delete' slug=object.slug %}">Eliminar</a>
+        <a class="btn btn-outline-primary" href="{% url 'update' slug=object.slug %}">Actualizar</a>
         <h1>{{object.title}}</h1>
         <img src="{{object.thumbnail.url}}" class="card-img-top" alt="...">
         <p>{{object.content}}</p>

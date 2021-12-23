@@ -40,23 +40,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'create' %}">Crear post</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            Perfil
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Usuario</a></li>
-                            <li><a class="dropdown-item" href="#">Configuracion</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Cerrar sesion</a></li>
-                        </ul>
-                    </li>
+                    {% endif %}
                 </ul>
                 {% if user.is_authenticated %}
                     <div class="btn-group">
@@ -67,9 +55,7 @@
                             <li><a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a></li>
                         </ul>
                     </div>
-			        <!-- <span>Bienvenid@, {{ user.username|upper }}!</span>
-                    <a class="btn btn-primary" href="{% url 'logout' %}" role="button">Cerrar sesión</a> -->
-		        {% else %}
+			    {% else %}
                     <a class="btn btn-primary" href="{% url 'login' %}" role="button">Iniciar sesión</a>
                     <a class="btn btn-outline-primary" href="{% url 'signup' %}" role="button">Crear cuenta</a>
                 {% endif %}

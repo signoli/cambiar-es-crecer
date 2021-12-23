@@ -7,12 +7,27 @@ from .forms import PostForm, SignUpForm
 from posts.models import Post, User
 from django.http import HttpResponseRedirect
 
+from datetime import datetime
+
 from slugify import slugify
 import uuid
 
 
 class PostListView(ListView):
     model = Post
+    # paginate_by = 12
+    ordering = ['-publish_date']
+
+    # def get_queryset(self):
+    #     startDate = datetime.date('01/01/2021')
+    #     today = datetime.now()
+
+    #     from = self.request.GET.get('to', str(startDate))
+    #     to = self.request.GET.get('to', today)
+    #     category = self.request.GET.get('category', '__all__')
+    
+    #     new_context = Post.objects.filter(category=category))
+        # return new_context
 
 class PostDetailView(DetailView):
     model = Post

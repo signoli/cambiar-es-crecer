@@ -12,26 +12,36 @@
 {% block content %}
     <div class="container">
         <div class='row' style='padding-top:40px'>
-            
-        {% for object in object_list %}
-        <div class='col-4' style='margin-top:40px'>
-        <div class="card" style="width: 18rem;">
-            <img src="{{object.thumbnail.url}}" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title"> {{object.title}} </h5>
-              <p class="card-text"> {{object.content|truncatechars:120}} </p>
-              <a href="{{ object.get_absolute_url }}" class="btn btn-primary">Leer mas...</a>
+            {% for object in object_list %}
+            <div class='col-4' style='margin-top:40px'>
+                <div class="card" style="width: 22rem;">
+                    <img src="{{object.thumbnail.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title"> {{object.title}} </h5>
+                        <p class="card-text"> {{object.content|truncatechars:120}} </p>
+                        <div class="d-flex justify-content-center">
+                            <a href="{{ object.get_absolute_url }}" class="btn btn-primary btn-lg btn-block">Leer mas...</a>
+                        </div>
+                        <hr class="my-4">
+                        <div class="d-flex justify-content-center">
+                            <span>
+                                {{ object.get_like_count }}
+                                <i class="fas fa-thumbs-up" style="margin-right: 25px"></i>
+                            </span>
+                            <span>
+                                {{ object.get_comment_count }}
+                                <i class="fas fa-comments" style="margin-right: 25px"></i>
+                            </span>
+                            <span>
+                                {{ object.get_view_count }}
+                                <i class="fas fa-eye" style="margin-right: 25px"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <hr />
-            <span>Vistas</span>
-            <span>Comentarios</span>
-            <span>Likes</span>
-
-          </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-   
-</div>
-    <div>
+    </div>
 {% endblock content%}
 

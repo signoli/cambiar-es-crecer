@@ -82,7 +82,7 @@
                 <div class="card-body">
                     <h2 class="card-title">{{object.title}}</h2>
                     <small class="text-muted">
-                        {{ object.publish_date }} — <span class="badge badge-light" title="{{ object.category }}">{{ object.category | truncatechars:10}}</span>
+                        {{ object.publish_date }} — <span class="badge badge-light" title="{{ object.category }}">{{ object.category | truncatechars:30}}</span>
                     </small>
                     <p class="card-text">{{object.content|truncatechars:120}}</p>
                     <div class="d-flex justify-content-center">

@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import fields
-from django.shortcuts import render
+from django.shortcuts import redirect, render, get_object_or_404, redirect
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth import authenticate, login
 from .forms import PostForm, SignUpForm
@@ -99,3 +99,12 @@ class PostUpdateView(UpdateView):
         context = super().get_context_data(**kwargs)
         context.update({"view_type": 'Update'})
         return context
+
+def like(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    like_qs = Like.objects.filter(user=request.user, post=post)
+    if like_qs.exists():
+        like_qs[0].delete()
+        return redirect('detail', slug=slug)
+    Like.objects.create(user=request.user, post=post)
+    return redirect('detail', slug=slug)

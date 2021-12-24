@@ -8,11 +8,11 @@ from .models import Post, User
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['category', 'title', 'content', 'thumbnail']
+        fields = ['title', 'content','category', 'thumbnail']
         labels = {
-            'category': 'Categoría',
             'title': 'Título',
             'content': 'Contenido',
+            'category': 'Categoría',
             'thumbnail': 'Imagen',
         }
 

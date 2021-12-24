@@ -10,6 +10,8 @@
 {# Display django.contrib.messages as Bootstrap alerts #}
 {% bootstrap_messages %}
 
+{% block titulo %} {{object.title}} {% endblock %}
+
 
 {% block style %}
     <style>
@@ -38,6 +40,16 @@
                 <p class="lead" style="margin:10px">
                     {{object.content}}
                 </p>
+
+                <div class="d-flex justify-content-end" style='margin:20px'>
+                    {% if perms.posts.can_delete_post %}
+                        <a class="btn btn-outline-danger" href="{% url 'delete' slug=object.slug %}" style='margin-right:20px'>Eliminar</a>
+                    {% endif %}
+                    
+                    {% if perms.posts.can_change_post %}   
+                        <a class="btn btn-outline-primary" href="{% url 'update' slug=object.slug %}">Actualizar</a>
+                    {% endif %}
+                </div>
 
                 <hr/>
 
@@ -83,6 +95,15 @@
                                 {% endbuttons %}
                         </div>
 
+                        {% else %}
+                        <div class="p-2">
+                        <small class="text-muted">
+                            Para comentar debe inciar sesion
+                        </small>
+                        <a href="{% url 'login' %}" class="btn btn-primary btn-lg btn-block" style="color:white">Iniciar sesion</a>
+                        <a href="{% url 'signup' %}" class="btn btn-secondary btn-lg btn-block">Registrarse</a>
+                        {% endif %}
+                    </div>
                         <div class="p-2">
                             <h5>Comentarios</h5>
                             {% for comment in object.comments %}
@@ -101,34 +122,10 @@
                         </div>
                   
                     </div>
-                        
-                        
-                        
-                        
-                    </div>
 
-                    <hr/>
-                    
-                {% else %}
-                <small class="text-muted">
-                    Para comentar debe inciar sesion
-                </small>
-                <a href"#" class="btn btn-primary btn-lg btn-block" style="color:white">Iniciar sesion</a>
-                <a href"#" class="btn btn-secondary btn-lg btn-block">Registrarse</a>
-                {% endif %}
+                    </div>
             </div>
         </div>
     <div>
 
-
-    
-    <div class="d-flex justify-content-end" style='margin:20px'>
-        {% if perms.posts.can_delete_post %}
-            <a class="btn btn-danger" href="{% url 'delete' slug=object.slug %}" style='margin-right:20px'>Eliminar</a>
-        {% endif %}
-        
-        {% if perms.posts.can_change_post %}   
-            <a class="btn btn-outline-primary" href="{% url 'update' slug=object.slug %}">Actualizar</a>
-        {% endif %}
-    </div>
 {% endblock content%}

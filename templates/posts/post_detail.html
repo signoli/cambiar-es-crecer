@@ -110,10 +110,9 @@
                                 <ol class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <div class="ms-2 me-auto">
-                                        <div class="fw-bold">{{comment.user}}</div>
+                                        <div class="fw-bold">{{comment.user}} · <small class="text-muted"> Hace {{comment.timestamp|timesince}} </small></div>
                                         <p> 
-                                            {{ comment.content }} 
-                                            <small class="text-muted"> {{comment.timestamp|timesince}} </small>
+                                            {{ comment.content }}
                                         </p>
                                     </div>
                                     </li> 

@@ -38,7 +38,7 @@
                         class="form-control"
                         placeholder="dd/mm/yyyy"
                         aria-describedby="btn-group-desde"
-                        value="2021-12-01"
+                        value="{% firstof request.GET.from '2021-12-01' %}"
                     >
                 </div>
                 <div class="input-group ml-2">
@@ -52,7 +52,8 @@
                         class="form-control"
                         placeholder="dd/mm/yyyy"
                         aria-describedby="btn-group-hasta"
-                        value="{% now "Y-m-d" %}"
+                        {% now "Y-m-d" as datetoday %}
+                        value="{% firstof request.GET.to datetoday %}"
                         min="2021-12-01"
                         max="{% now "Y-m-d" %}"
                     >
@@ -63,9 +64,17 @@
                 class="form-control custom-select col-5"
                 aria-describedby="btn-group-categoria"
             >
+                {% if not request.GET.category or request.GET.category == 'ALL' %}
                 <option selected value="ALL">Todas las categorias</option>
+                {% else %}
+                <option value="ALL">Todas las categorias</option>
+                {% endif %}
                 {% for value, text in categories %}
-                <option value="{{value}}">{{text}}</option>
+                    {% if request.GET.category == value|lower %}
+                    <option selected value="{{value}}">{{text}}</option>
+                    {% else %}
+                    <option value="{{value}}">{{text}}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
             <button class="btn btn-outline-primary" type="submit">Filtrar</button>

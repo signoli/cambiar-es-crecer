@@ -12,7 +12,6 @@ import datetime
 from slugify import slugify
 import uuid
 
-
 class PostListView(ListView):
     model = Post
     # paginate_by = 12
@@ -25,10 +24,10 @@ class PostListView(ListView):
         from_date = self.request.GET.get('from', start_date)
         to_date = self.request.GET.get('to', today_date)
 
-        if from_date is 'string':
-            from_date = datetime.strptime(from_date, '%Y-%m-%d')
-        if to_date is 'string':
-            to_date = datetime.strptime(to_date, '%Y-%m-%d')
+        if isinstance(from_date, str):
+            from_date = datetime.datetime.strptime(from_date, '%Y-%m-%d')
+        if isinstance(to_date, str):
+            to_date = datetime.datetime.strptime(to_date, '%Y-%m-%d')
         category = self.request.GET.get('category', 'ALL')
 
         query = Post.objects.filter(publish_date__gte=from_date)

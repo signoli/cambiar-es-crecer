@@ -3,8 +3,8 @@ from django.db.models import fields
 from django.shortcuts import redirect, render, get_object_or_404, redirect
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth import authenticate, login
-from .forms import PostForm, SignUpForm
-from posts.models import Post, User, Category, Like
+from .forms import PostForm, SignUpForm, CommentForm
+from posts.models import Post, PostView, User, Category, Like
 from django.http import HttpResponseRedirect
 
 import datetime
@@ -48,6 +48,29 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
 
+    def post(self, *args, **kwargs):
+        form = CommentForm(self.request.POST)
+        if form.is_valid():
+            post = self.get_object()
+            comment = form.instance
+            comment.user = self.request.user
+            comment.post = post
+            comment.save()
+            return redirect('detail', slug=post.slug)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'form': CommentForm()    
+        })
+        return context
+
+    def get_object(self, **kwargs):
+        object = super().get_object(**kwargs)
+        if self.request.user.is_authenticated:
+            PostView.objects.get_or_create(user=self.request.user, post=object)
+
+        return object
 
 class PostDeleteView(DeleteView):
     model = Post

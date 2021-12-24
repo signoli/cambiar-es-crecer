@@ -30,21 +30,28 @@
                 <hr/>
 
                 {% if user.is_authenticated %}
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ object.get_like_url }}">
-                            {{ object.get_like_count }}
-                            <i class="fas fa-thumbs-up" style="margin-right: 25px"></i>
+                <div class="d-flex justify-content-center">
+                    <div class="p-2">
+                            <a href="{{ object.get_like_url }}" style="outline: none; text-decoration: none;">
+                            {{ object.get_like_count }} 
+                            <i class="fas fa-thumbs-up" style="margin:auto;"></i>
+                            <p> Me gusta </p>
                         </a>
-                        <span>
+                    </div>
+
+                    <div class="p-2"> 
                             {{ object.get_comment_count }}
                             <i class="fas fa-comments" style="margin-right: 25px"></i>
-                        </span>
-                        <span>
+                            <p> Comentarios </p>
+                    </div>
+
+                    <div class="p-2">
                             {{ object.get_view_count }}
                             <i class="fas fa-eye" style="margin-right: 25px"></i>
-                        </span>
+                            <p> Vistas </p>
                     </div>
-                
+                  </div>
+                    
                 {% else %}
                 <small class="text-muted">
                     Para comentar debe inciar sesion

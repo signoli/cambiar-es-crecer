@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render, get_object_or_404, redirect
 from django.views.generic import ListView, DeleteView, CreateView, UpdateView, DetailView
 from django.contrib.auth import authenticate, login
 from .forms import PostForm, SignUpForm
-from posts.models import Post, User, Category
+from posts.models import Post, User, Category, Like
 from django.http import HttpResponseRedirect
 
 import datetime

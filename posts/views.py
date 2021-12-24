@@ -57,12 +57,15 @@ class PostDetailView(DetailView):
             comment.post = post
             comment.save()
             return redirect('detail', slug=post.slug)
+            
+        return redirect('detail', slug=self.get_object().slug)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context.update({
             'form': CommentForm()    
         })
+        
         return context
 
     def get_object(self, **kwargs):

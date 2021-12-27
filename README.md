@@ -1,5 +1,14 @@
 # CAMBIAR ES CRECER
 
+## INTEGRANTES:
+* Alegre, Flavio
+* Bouvier, Antonella 
+* Fantín, Malena
+* Leiva Ivan Gastón
+* Massa Toledo, Sebastian
+* Siñoli, Sergio
+
+
 ## PREREQUISITOS
 ### Mac/Linux
 * Acceso a la `shell` del SO o mas conocido como `terminal`

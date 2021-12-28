@@ -5,10 +5,11 @@ from .models import Comment
 
 from .models import Post, User
 
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'content','category', 'thumbnail']
+        fields = ['title', 'content', 'category', 'thumbnail']
         labels = {
             'title': 'Título',
             'content': 'Contenido',
@@ -16,10 +17,14 @@ class PostForm(forms.ModelForm):
             'thumbnail': 'Imagen',
         }
 
+
 class CommentForm(forms.ModelForm):
-    content = forms.CharField(required=True, widget=forms.Textarea(attrs={
-        'rows': 3,
-    }))
+    content = forms.CharField(
+        required=True,
+        widget=forms.Textarea(attrs={'rows': 3}),
+        label = ''
+    )
+
     class Meta:
         model = Comment
         fields = ('content',)

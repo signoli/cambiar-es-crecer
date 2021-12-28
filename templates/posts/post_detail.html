@@ -26,7 +26,7 @@
 {% block content %}
     <div class="container">
         <div class='row'>
-            <div class='col-9' style="margin:auto;">
+            <div class='col-8' style="margin:auto;">
                 <h1 style="margin-top:20px">
                     {{object.title}}
                 </h1>
@@ -106,14 +106,13 @@
                     </div>
                         <div class="p-2">
                             <h5>Comentarios</h5>
-                            {% for comment in object.comments %}
+                            {% for comment in object.comments reversed %}
                                 <ol class="list-group">
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
                                     <div class="ms-2 me-auto">
-                                        <div class="fw-bold">{{comment.user}}</div>
+                                        <div class="fw-bold">{{comment.user}} · <small class="text-muted"> Hace {{comment.timestamp|timesince}} </small></div>
                                         <p> 
-                                            {{ comment.content }} 
-                                            <small class="text-muted"> {{comment.timestamp|timesince}} </small>
+                                            {{ comment.content }}
                                         </p>
                                     </div>
                                     </li> 

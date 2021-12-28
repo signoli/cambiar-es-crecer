@@ -21,9 +21,13 @@
      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
      <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
     <title>{% block titulo %} Cambiar es crecer {% endblock %}</title>
+   
     {% block style %}
+        
+       
     
     {% endblock style %}
+
 </head>
 
 <body>
@@ -31,12 +35,16 @@
     <!-- NAVEGADOR DEL SITIO -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         
-        <div class="container-fluid">
-            
+        <div class="container-fluid" style="height:40px">
             <a class="navbar-brand" href="{% url 'list' %}">
-                <img style="width:20%; height: 20%" src="{% static 'source/logo.jpg' %}">
+                <p style="font-size:25px; font-weight: bold; text-align: center; margin-top:15px">
+                    <img style="width:20%; height: 20%" src="{% static 'source/logo.png' %}">
+                    [CAMBIAR]
+
+                </p>
             </a>
             
+
     
                 {% if user.is_authenticated %}
                     <div class="btn-group">

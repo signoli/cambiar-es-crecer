@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'ckeditor',
+    'whitenoise'
 ]
 
 MIDDLEWARE = [

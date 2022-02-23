@@ -16,6 +16,7 @@ class PostListView(ListView):
     model = Post
     # paginate_by = 12
     ordering = ['-publish_date']
+    paginate_by = 6
 
     def get_queryset(self):
         start_date = datetime.date(2021, 12, 1)

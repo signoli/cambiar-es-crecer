@@ -104,16 +104,16 @@
                         <a href="{% url 'signup' %}" class="btn btn-secondary btn-lg btn-block">Registrarse</a>
                         {% endif %}
                     </div>
-                        <div class="p-2">
+                        <div class="p-2" >
                             <h5>Comentarios</h5>
                             {% for comment in object.comments reversed %}
-                                <ol class="list-group">
+                                <ol class="list-group" style="margin: 10px">
                                     <li class="list-group-item d-flex justify-content-between align-items-start">
-                                    <div class="ms-2 me-auto">
-                                        <div class="fw-bold">{{comment.user}} · <small class="text-muted"> Hace {{comment.timestamp|timesince}} </small></div>
-                                        <p> 
+                                    <div class="ms-2 me-auto" >
+                                        <div class="fw-bold" >{{comment.user}}  <small class="text-muted">· Hace {{comment.timestamp|timesince}} </small></div>
+                                       
                                             {{ comment.content }}
-                                        </p>
+                                        
                                     </div>
                                     </li> 
                                 </ol>

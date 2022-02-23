@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.fields import CharField
 from django.shortcuts import reverse 
-
+from ckeditor.fields import RichTextField
 class User(AbstractUser):
     pass
 
@@ -18,7 +18,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=100)
-    content = models.TextField()
+    content = RichTextField(blank=True, null=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     thumbnail = models.ImageField()
     publish_date = models.DateTimeField(auto_now_add=True)

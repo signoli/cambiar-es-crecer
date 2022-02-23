@@ -8,10 +8,10 @@
     }
 </style>
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         var $to = $("#to");
         var $from = $("#from");
-        $from.on("change", function() {
+        $from.on("change", function () {
             var fromDate = new Date(this.value);
             var toDate = new Date($to[0].value);
             if (fromDate > toDate) {
@@ -27,58 +27,38 @@
 <div class="container mt-3">
     <form class="d-flex justify-content-between" method="get">
         <div class="col-6 form-inline">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text" id="btn-group-desde">Desde</div>
-                    </div>
-                    <input
-                        name="from"
-                        id="from"
-                        type="date"
-                        class="form-control"
-                        placeholder="dd/mm/yyyy"
-                        aria-describedby="btn-group-desde"
-                        value="{% firstof request.GET.from '2021-12-01' %}"
-                    >
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" id="btn-group-desde">Desde</div>
                 </div>
-                <div class="input-group ml-2">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text" id="btn-group-hasta">Hasta</div>
-                    </div>
-                    <input
-                        name="to"
-                        id="to"
-                        type="date"
-                        class="form-control"
-                        placeholder="dd/mm/yyyy"
-                        aria-describedby="btn-group-hasta"
-                        {% now "Y-m-d" as datetoday %}
-                        value="{% firstof request.GET.to datetoday %}"
-                        min="2021-12-01"
-                        max="{% now "Y-m-d" %}"
-                    >
-                </div>
+                <input name="from" id="from" type="date" class="form-control" placeholder="dd/mm/yyyy"
+                    aria-describedby="btn-group-desde" value="{% firstof request.GET.from '2021-12-01' %}">
             </div>
-            <select
-                name="category"
-                class="form-control custom-select col-5"
-                aria-describedby="btn-group-categoria"
-            >
-                {% if not request.GET.category or request.GET.category == 'ALL' %}
-                <option selected value="ALL">Todas las categorias</option>
-                {% else %}
-                <option value="ALL">Todas las categorias</option>
-                {% endif %}
-                {% for value, text in categories %}
-                    {% if request.GET.category == value|lower %}
-                    <option selected value="{{value}}">{{text}}</option>
-                    {% else %}
-                    <option value="{{value}}">{{text}}</option>
-                    {% endif %}
-                {% endfor %}
-            </select>
-            <button class="btn btn-outline-primary" type="submit">Filtrar</button>
-<!--            {{ categories }}-->
+            <div class="input-group ml-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text" id="btn-group-hasta">Hasta</div>
+                </div>
+                <input name="to" id="to" type="date" class="form-control" placeholder="dd/mm/yyyy"
+                    aria-describedby="btn-group-hasta" {% now "Y-m-d" as datetoday %}
+                    value="{% firstof request.GET.to datetoday %}" min="2021-12-01" max="{% now " Y-m-d" %}">
+            </div>
+        </div>
+        <select name="category" class="form-control custom-select col-5" aria-describedby="btn-group-categoria">
+            {% if not request.GET.category or request.GET.category == 'ALL' %}
+            <option selected value="ALL">Todas las categorias</option>
+            {% else %}
+            <option value="ALL">Todas las categorias</option>
+            {% endif %}
+            {% for value, text in categories %}
+            {% if request.GET.category == value|lower %}
+            <option selected value="{{value}}">{{text}}</option>
+            {% else %}
+            <option value="{{value}}">{{text}}</option>
+            {% endif %}
+            {% endfor %}
+        </select>
+        <button class="btn btn-outline-primary" type="submit">Filtrar</button>
+        <!--            {{ categories }}-->
     </form>
 </div>
 </div>
@@ -91,32 +71,76 @@
                 <div class="card-body">
                     <h2 class="card-title">{{object.title}}</h2>
                     <small class="text-muted">
-                        {{ object.publish_date }} — <span class="badge badge-light" title="{{ object.category }}">{{ object.category | truncatechars:30}}</span>
+                        {{ object.publish_date }} — <span class="badge badge-light" title="{{ object.category }}">{{
+                            object.category | truncatechars:30}}</span>
                     </small>
-                    <p class="card-text">{{object.content|truncatechars:120}}</p>
+                    <p class="card-text">{{object.content|truncatechars:100}}</p>
                     <div class="d-flex justify-content-center">
                         <a href="{{ object.get_absolute_url }}" class="btn btn-primary btn-lg btn-block">Leer mas...</a>
                     </div>
                     <hr class="my-4">
                     <div class="d-flex justify-content-center">
-                            <span>
-                                {{ object.get_like_count }}
-                                <i class="fas fa-thumbs-up" style="margin-right: 25px"></i>
-                            </span>
                         <span>
-                                {{ object.get_comment_count }}
-                                <i class="fas fa-comments" style="margin-right: 25px"></i>
-                            </span>
+                            {{ object.get_like_count }}
+                            <i class="fas fa-thumbs-up" style="margin-right: 25px"></i>
+                        </span>
                         <span>
-                                {{ object.get_view_count }}
-                                <i class="fas fa-eye" style="margin-right: 25px"></i>
-                            </span>
+                            {{ object.get_comment_count }}
+                            <i class="fas fa-comments" style="margin-right: 25px"></i>
+                        </span>
+                        <span>
+                            {{ object.get_view_count }}
+                            <i class="fas fa-eye" style="margin-right: 25px"></i>
+                        </span>
                     </div>
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-</div>
-{% endblock content%}
 
+    <!--PAGINADOR-->
+    <div class="container p-4">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-6 ">
+                {% if is_paginated %}
+
+                <nav aria-label="...">
+                    <ul class="pagination justify-content-center">
+
+                        {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href='?page={{ page_obj.previous_page_number }}'>
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                        {% for i in paginator.page_range %}
+                        <li class="page-item {% if page_obj.number == i %} active {% endif %}" aria-current="page">
+                            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                        </li>
+                        {% endfor %}
+
+                        {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href='?page={{ page_obj.next_page_number }}'>
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {% endif %}
+
+                    </ul>
+                </nav>
+
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!--FIN DEL PAGINADOR-->
+
+
+</div>
+
+
+{% endblock content%}
